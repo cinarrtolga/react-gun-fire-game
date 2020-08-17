@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Cell from './Cell';
 import Statics from './Statics';
 import '../Styles/Game.css'
@@ -25,6 +26,8 @@ class Game extends React.Component {
             bullet: 0,
             gameStatus: 'Ready To Start!'
         }
+
+        this.gameRef = React.createRef();
 
         this.handleKeyDown = this.handleKeyDown.bind(this);
     }
@@ -91,6 +94,7 @@ class Game extends React.Component {
                         const oldFire = currentStage[index + 1];
 
                         if (oldFire[point] === 3) {
+                            console.log("Removed!");
                             oldFire[point] = 4;
                         }
                         currentStage[index + 1] = oldFire;
@@ -106,6 +110,7 @@ class Game extends React.Component {
                                     isAttacking = false;
                                 }
 
+                                console.log("Created!");
                                 newFire[point] = 3;
                                 currentStage[index] = newFire;
                                 this.InitializeGun();
@@ -214,6 +219,8 @@ class Game extends React.Component {
             setTimeout(() => {
                 this.attack();
             }, 50);
+
+            this.gameRef.current.focus();
         }
     }
 
@@ -252,7 +259,7 @@ class Game extends React.Component {
     render() {
         return (
             <div className="game-area">
-                <div className="game-board" onKeyDown={this.handleKeyDown} tabIndex="0" >
+                <div className="game-board" ref={this.gameRef} onKeyDown={this.handleKeyDown} tabIndex="0" >
                     {this.state.stage.map(row => row.map((cell, x) => <Cell key={x} type={cell} />))}
                 </div>
                 <Statics

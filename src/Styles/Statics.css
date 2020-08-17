@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Monster_of_South_St';
+    src: local('Monster_of_South_St'), url(../fonts/Monster_of_South_St.ttf) format('truetype');
+}
+
 .static-board {
     width: 200px;
     margin: 10px; 
@@ -20,7 +25,8 @@ button {
     margin: 10px;
     text-align: center;
     margin-bottom: 11px;
-    margin-top: 11px;
+    margin-top: 12px;
+    font-family: Monster_of_South_St;
 }
 
 .bordered-header {

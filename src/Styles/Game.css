@@ -1,0 +1,16 @@
+.game-area 
+{
+    width: 1000px;
+    float: left;
+    border: 5px;
+    display: block;
+}
+
+.game-board {
+    width: 750px;
+    margin: 10px; 
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    display: inline-block;
+    background-image: url("../Images/space.jpg");
+}

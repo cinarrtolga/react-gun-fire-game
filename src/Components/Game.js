@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Cell from './Cell';
 import Statics from './Statics';
 import '../Styles/Game.css'
@@ -23,6 +22,7 @@ class Game extends React.Component {
             enemyLevel: 1,
             levelTarget: 0,
             attackCount: 1500,
+            currentAttack: 0,
             bullet: 0,
             gameStatus: 'Ready To Start!'
         }
@@ -30,6 +30,11 @@ class Game extends React.Component {
         this.gameRef = React.createRef();
 
         this.handleKeyDown = this.handleKeyDown.bind(this);
+    }
+
+    componentDidMount()
+    {
+        this.attack();
     }
 
     //Move ans space key definitions.
@@ -94,7 +99,6 @@ class Game extends React.Component {
                         const oldFire = currentStage[index + 1];
 
                         if (oldFire[point] === 3) {
-                            console.log("Removed!");
                             oldFire[point] = 4;
                         }
                         currentStage[index + 1] = oldFire;
@@ -110,7 +114,6 @@ class Game extends React.Component {
                                     isAttacking = false;
                                 }
 
-                                console.log("Created!");
                                 newFire[point] = 3;
                                 currentStage[index] = newFire;
                                 this.InitializeGun();
@@ -130,7 +133,7 @@ class Game extends React.Component {
 
     //Create enemy next to gun.
     async attack() {
-        for (let index = 0; index <= this.state.attackCount; index++) {
+        for (let index = this.state.currentAttack; index <= this.state.attackCount; index++) {
             setTimeout(() => {
                 if (this.state.isRunning) {
                     this.CheckGameStatus();
@@ -151,7 +154,6 @@ class Game extends React.Component {
                             ...newStage
                         ]
                     });
-
                 }
             }, (index + 1) * 1000);
         }
@@ -216,10 +218,6 @@ class Game extends React.Component {
                 this.InitializeGun();
             }, 50);
 
-            setTimeout(() => {
-                this.attack();
-            }, 50);
-
             this.gameRef.current.focus();
         }
     }
@@ -234,11 +232,13 @@ class Game extends React.Component {
             enemyLevel: 1,
             levelTarget: 0,
             attackCount: 1500,
+            currentAttack: 0,
             bullet: 0,
             gameStatus: 'Ready To Start!'
         });
 
         backgroundVoice.pause();
+        this.gameRef.current.focus();
     }
 
     pause() {
@@ -254,6 +254,7 @@ class Game extends React.Component {
                 isRunning: !this.state.isRunning
             });
         }, 50);
+        this.gameRef.current.focus();
     }
 
     render() {

@@ -4,9 +4,9 @@ import Statics from './Statics';
 import '../Styles/Game.css'
 
 const newGun = Array(15).fill(null);
-const fireVoice = new Audio('https://blog.cinarr.com/gunfire.mp3');
-const loseVoice = new Audio('https://blog.cinarr.com/game-lose-2.mp3');
-const successVoice = new Audio('https://blog.cinarr.com/success-sound-effect.mp3');
+const fireVoice = new Audio('https://www.cinarr.com/gunfire.mp3');
+const loseVoice = new Audio('https://www.cinarr.com/game-lose-2.mp3');
+const successVoice = new Audio('https://www.cinarr.com/success-sound-effect.mp3');
 const backgroundVoice = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
 
 class Game extends React.Component {

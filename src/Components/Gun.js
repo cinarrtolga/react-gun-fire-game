@@ -3,7 +3,7 @@ import '../Styles/Gun.css'
 
 const Gun = ({ type }) => (
     <div className="gun">
-        <img src={require('../Images/spaceship.png')} />
+        <img src={require('../Images/spaceship.png')} alt="spaceship" />
     </div>
 );
 

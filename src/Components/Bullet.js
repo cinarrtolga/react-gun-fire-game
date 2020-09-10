@@ -8,7 +8,7 @@ const style = {
 
 const Bullet = ({ type }) => (
     <div className="bullet" style={style}>
-        <img src={require('../Images/misille.png')} alt="Enemy" />
+        <img src={require('../Images/misille.png')} alt="misille" />
     </div>
 );
 

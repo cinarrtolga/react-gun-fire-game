@@ -9,7 +9,6 @@ const loseVoice = new Audio('https://blog.cinarr.com/game-lose-2.mp3');
 const successVoice = new Audio('https://blog.cinarr.com/success-sound-effect.mp3');
 const backgroundVoice = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
 
-
 class Game extends React.Component {
     constructor(props) {
         super(props);
@@ -27,17 +26,15 @@ class Game extends React.Component {
             gameStatus: 'Ready To Start!'
         }
 
+        this.baseState = this.state;
         this.gameRef = React.createRef();
-
         this.handleKeyDown = this.handleKeyDown.bind(this);
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         this.attack();
     }
 
-    //Move ans space key definitions.
     async handleKeyDown(event) {
         if (event.keyCode === 37 && this.state.gunPoint > 0) {
             this.setState({
@@ -66,7 +63,6 @@ class Game extends React.Component {
         }
     }
 
-    //Point gun on game area.
     async InitializeGun() {
         if (this.state.isRunning) {
             const newStage = this.state.stage.slice();
@@ -80,7 +76,6 @@ class Game extends React.Component {
         }
     }
 
-    //Create fire when user click to space. 
     async fire(point) {
         if (this.state.isRunning) {
             const currentStage = this.state.stage.slice();
@@ -131,7 +126,6 @@ class Game extends React.Component {
         }
     }
 
-    //Create enemy next to gun.
     async attack() {
         for (let index = this.state.currentAttack; index <= this.state.attackCount; index++) {
             setTimeout(() => {
@@ -184,7 +178,6 @@ class Game extends React.Component {
             });
 
             successVoice.play();
-
             this.InitializeLevel();
         } else {
             const controlledLine = this.state.stage[8];
@@ -223,19 +216,7 @@ class Game extends React.Component {
     }
 
     reset() {
-        this.setState({
-            stage: Array(10).fill(new Array(15).fill(null)),
-            isRunning: false,
-            point: 0,
-            gunPoint: 7,
-            previousGunPoint: 0,
-            enemyLevel: 1,
-            levelTarget: 0,
-            attackCount: 1500,
-            currentAttack: 0,
-            bullet: 0,
-            gameStatus: 'Ready To Start!'
-        });
+        this.setState(this.baseState);
 
         backgroundVoice.pause();
         this.gameRef.current.focus();
@@ -244,8 +225,7 @@ class Game extends React.Component {
     pause() {
         if (this.state.isRunning) {
             backgroundVoice.pause();
-        }
-        else {
+        } else {
             backgroundVoice.play();
         }
 

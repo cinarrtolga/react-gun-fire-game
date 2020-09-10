@@ -40,22 +40,18 @@ class Game extends React.Component {
             this.setState({
                 previousGunPoint: this.state.gunPoint,
                 gunPoint: this.state.gunPoint - 1
-            });
-
-            setTimeout(() => {
+            }, () => {
                 this.InitializeGun();
-            }, 50);
+            });
         }
 
         if (event.keyCode === 39 && this.state.gunPoint < 14) {
             this.setState({
                 previousGunPoint: this.state.gunPoint,
                 gunPoint: this.state.gunPoint + 1
-            });
-
-            setTimeout(() => {
+            }, () => {
                 this.InitializeGun();
-            }, 50);
+            });
         }
 
         if (event.keyCode === 32) {
